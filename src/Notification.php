@@ -48,6 +48,20 @@ class Notification implements \JsonSerializable
     }
 
     /**
+     * android/ios: the priority of the notification
+     *
+     * @param string $priority
+     *
+     * @return \paragraph1\phpFCM\Notification
+     */
+
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+        return $this;
+    }
+
+    /**
      * iOS only: will add smal red bubbles indicating the number of notifications to your apps icon
      *
      * @param integer $badge
@@ -134,6 +148,9 @@ class Notification implements \JsonSerializable
             'title' => $this->title,
             'body' => $this->body
         );
+        if ($this->priority) {
+            $jsonData['priority'] = $this->priority;
+        }
         if ($this->badge) {
             $jsonData['badge'] = $this->badge;
         }
